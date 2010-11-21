@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<Actor Mass="1" xmlns="http://www.simplysim.net/2009/12/datamodel.xsd">
+  <Elements>
+    <Element Name="Dock" Class="Object" Type="dock_files\dock">
+      <Translation />
+      <Rotation>
+        <Quaternion W="1" />
+      </Rotation>
+      <Scale X="0.4" Y="0.4" Z="0.4" />
+    </Element>
+  </Elements>
+  <LinearDamping X="0.5" Y="0.5" Z="0.5" />
+  <AngularDamping X="0.5" Y="0.5" Z="0.5" />
+  <Shapes>
+    <BoxShape>
+      <Position Y="0.005" Z="-0.108" />
+      <Orientation>
+        <Quaternion W="1" />
+      </Orientation>
+      <Dimensions X="0.23" Y="0.01" Z="0.014" />
+    </BoxShape>
+    <BoxShape>
+      <Position Y="0.005" Z="0.108" />
+      <Orientation>
+        <Quaternion W="1" />
+      </Orientation>
+      <Dimensions X="0.23" Y="0.01" Z="0.014" />
+    </BoxShape>
+    <BoxShape>
+      <Position X="-0.072" Y="0.188" />
+      <Orientation>
+        <Quaternion W="0.707106769" Y="-0.707106769" />
+      </Orientation>
+      <Dimensions X="0.15" Y="0.006" Z="0.01" />
+    </BoxShape>
+    <BoxShape>
+      <Position X="0.072" Y="0.188" />
+      <Orientation>
+        <Quaternion W="0.707106769" Y="-0.707106769" />
+      </Orientation>
+      <Dimensions X="0.15" Y="0.006" Z="0.01" />
+    </BoxShape>
+    <BoxShape>
+      <Position X="0.086" Y="0.095" Z="-0.086" />
+      <Orientation>
+        <Quaternion W="1" X="0.08682408" Y="-0.00759612257" Z="0.08682408" />
+      </Orientation>
+      <Dimensions X="0.01" Y="0.19" Z="0.01" />
+    </BoxShape>
+    <BoxShape>
+      <Position X="-0.086" Y="0.095" Z="-0.086" />
+      <Orientation>
+        <Quaternion W="1" X="0.08682408" Y="0.00759612257" Z="-0.08682408" />
+      </Orientation>
+      <Dimensions X="0.01" Y="0.19" Z="0.01" />
+    </BoxShape>
+    <BoxShape>
+      <Position X="0.086" Y="0.095" Z="0.086" />
+      <Orientation>
+        <Quaternion W="1" X="-0.08682408" Y="0.007596122" Z="0.08682408" />
+      </Orientation>
+      <Dimensions X="0.01" Y="0.19" Z="0.01" />
+    </BoxShape>
+    <BoxShape>
+      <Position X="-0.086" Y="0.095" Z="0.086" />
+      <Orientation>
+        <Quaternion W="1" X="-0.08682408" Y="-0.00759612257" Z="-0.08682408" />
+      </Orientation>
+      <Dimensions X="0.01" Y="0.19" Z="0.01" />
+    </BoxShape>
+    <BoxShape>
+      <Position Y="0.188" Z="-0.072" />
+      <Orientation>
+        <Quaternion W="1" />
+      </Orientation>
+      <Dimensions X="0.15" Y="0.006" Z="0.01" />
+    </BoxShape>
+    <BoxShape>
+      <Position Y="0.188" Z="0.072" />
+      <Orientation>
+        <Quaternion W="1" />
+      </Orientation>
+      <Dimensions X="0.15" Y="0.006" Z="0.01" />
+    </BoxShape>
+    <BoxShape>
+      <Position X="0.108" Y="0.005" />
+      <Orientation>
+        <Quaternion W="1" />
+      </Orientation>
+      <Dimensions X="0.014" Y="0.01" Z="0.23" />
+    </BoxShape>
+    <BoxShape>
+      <Position X="-0.108" Y="0.005" />
+      <Orientation>
+        <Quaternion W="1" />
+      </Orientation>
+      <Dimensions X="0.014" Y="0.01" Z="0.23" />
+    </BoxShape>
+  </Shapes>
+</Actor>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema version="2.0"
+           targetNamespace="http://www.simplysim.net/2010/06/droneconfig.xsd"
+           elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.simplysim.net/2010/06/droneconfig.xsd" >
+
+  <xs:element name="DroneConfig">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Rotors" minOccurs="1" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Rotor" type="RotorDesc" minOccurs="1" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="BodyName" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="RotorDesc">
+    <xs:sequence>
+      <xs:element name="Engine">
+        <xs:complexType>
+          <xs:attribute name="Name" type="xs:string" use="required"/>
+          <xs:attribute name="Polarity" use="required" type="Polarity" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Blade">
+        <xs:complexType>
+          <xs:attribute name="Name" type="xs:string" use="required"/>
+          <xs:attribute name="Type" use="required" type="BladeType"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Name" type="xs:string" use="required"/>
+    <xs:attribute name="MassLift" type="xs:float" use="required"/>
+    <xs:attribute name="RPMLift" type="xs:float" use="required"/>
+  </xs:complexType>
+
+  <xs:simpleType name="Polarity">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Positive" />
+      <xs:enumeration value="Negative" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="BladeType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="RightHandedBlade" />
+      <xs:enumeration value="LeftHandedBlade" />
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

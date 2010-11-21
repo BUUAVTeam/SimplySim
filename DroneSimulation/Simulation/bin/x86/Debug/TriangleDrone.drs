@@ -1,0 +1,29 @@
+﻿<?xml version="1.0"?>
+<DroneConfig BodyName="Body" xmlns="http://www.simplysim.net/2010/06/droneconfig.xsd">
+  <Rotors>
+    <Rotor Name="FrontRotor" MassLift="0.16666667" RPMLift="1000">
+      <Engine Name="FrontDrive" Polarity="Positive" />
+      <Blade Name="FrontBlade" Type="RightHandedBlade" />
+    </Rotor>
+    <Rotor Name="RearRotor" MassLift="0.16666667" RPMLift="1000">
+      <Engine Name="RearDrive" Polarity="Negative" />
+      <Blade Name="RearBlade" Type="LeftHandedBlade" />
+    </Rotor>
+	 <Rotor Name="FrontLeftRotor" MassLift="0.16666667" RPMLift="1000">
+      <Engine Name="FrontLeftDrive" Polarity="Negative" />
+      <Blade Name="FrontLeftBlade" Type="LeftHandedBlade" />
+    </Rotor>
+    <Rotor Name="RearLeftRotor" MassLift="0.16666667" RPMLift="1000">
+      <Engine Name="RearLeftDrive" Polarity="Positive" />
+      <Blade Name="RearLeftBlade" Type="RightHandedBlade" />
+    </Rotor>
+	  <Rotor Name="FrontRightRotor" MassLift="0.16666667" RPMLift="1000">
+      <Engine Name="FrontRightDrive" Polarity="Negative" />
+      <Blade Name="FrontRightBlade" Type="LeftHandedBlade" />
+    </Rotor>
+    <Rotor Name="RearRightRotor" MassLift="0.16666667" RPMLift="1000">
+      <Engine Name="RearRightDrive" Polarity="Positive" />
+      <Blade Name="RearRightBlade" Type="RightHandedBlade" />
+    </Rotor>  
+  </Rotors>
+</DroneConfig>

@@ -1,0 +1,5 @@
+C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\DroneLibrary\bin\Debug\Drone Library.dll
+C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\DroneLibrary\bin\Debug\Drone Library.pdb
+C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\DroneLibrary\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\DroneLibrary\obj\Debug\Drone Library.dll
+C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\DroneLibrary\obj\Debug\Drone Library.pdb

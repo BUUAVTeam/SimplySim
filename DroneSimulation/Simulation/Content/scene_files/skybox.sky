@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<Sky xmlns="http://www.simplysim.net/2009/12/datamodel.xsd">
+  <Box IsAdditive="false">
+    <Texture Type="skybox_files\skyboxcolor.dds" />
+  </Box>
+</Sky>
