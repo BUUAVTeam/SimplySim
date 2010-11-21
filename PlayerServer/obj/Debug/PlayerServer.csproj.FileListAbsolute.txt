@@ -1,0 +1,5 @@
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\PlayerServer\bin\Debug\PlayerServer.dll
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\PlayerServer\bin\Debug\PlayerServer.pdb
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\PlayerServer\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\PlayerServer\obj\Debug\PlayerServer.dll
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\PlayerServer\obj\Debug\PlayerServer.pdb

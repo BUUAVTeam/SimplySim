@@ -71,6 +71,10 @@
     <Compile Include="SmoothController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\PlayerServer\PlayerServer.csproj">
+      <Project>{6EEF37DD-E09B-4993-B716-FF72C2309CFC}</Project>
+      <Name>PlayerServer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CheckPointController\CheckPointController.csproj">
       <Project>{250B891E-7D37-4A50-A6AD-A9C9F6769AB4}</Project>
       <Name>CheckPointController</Name>

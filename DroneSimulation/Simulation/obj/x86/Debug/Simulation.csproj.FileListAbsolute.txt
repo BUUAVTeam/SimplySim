@@ -13,3 +13,20 @@ C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\Simulation\bin\x86\Debug\D
 C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\Simulation\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\Simulation\obj\x86\Debug\Drone Simulation.exe
 C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\Simulation\obj\x86\Debug\Drone Simulation.pdb
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Debug\Config\EngineConfig.xml
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Debug\BoxDrone.drs
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Debug\SphereDrone.drs
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Debug\TriangleDrone.drs
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Debug\Drone Simulation.exe
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Debug\Drone Simulation.pdb
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Debug\CheckPointController.dll
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Debug\ControllersLibrary.dll
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Debug\Drone Library.dll
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Debug\CheckPointController.pdb
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Debug\ControllersLibrary.pdb
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Debug\Drone Library.pdb
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\obj\x86\Debug\Drone Simulation.exe
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\obj\x86\Debug\Drone Simulation.pdb
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Debug\PlayerServer.dll
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Debug\PlayerServer.pdb

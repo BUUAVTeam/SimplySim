@@ -6,8 +6,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControllersLibrary", "DroneSimulation\ControllersLibrary\ControllersLibrary.csproj", "{E830A1C6-44A3-4678-B4CF-179B3ED6DA3D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simulation", "DroneSimulation\Simulation\Simulation.csproj", "{4A80423F-098F-413B-AD77-0F156CADC44E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6EEF37DD-E09B-4993-B716-FF72C2309CFC} = {6EEF37DD-E09B-4993-B716-FF72C2309CFC}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckPointController", "DroneSimulation\CheckPointController\CheckPointController.csproj", "{250B891E-7D37-4A50-A6AD-A9C9F6769AB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayerServer", "PlayerServer\PlayerServer.csproj", "{6EEF37DD-E09B-4993-B716-FF72C2309CFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +64,16 @@ Global
 		{250B891E-7D37-4A50-A6AD-A9C9F6769AB4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{250B891E-7D37-4A50-A6AD-A9C9F6769AB4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{250B891E-7D37-4A50-A6AD-A9C9F6769AB4}.Release|x86.ActiveCfg = Release|Any CPU
+		{6EEF37DD-E09B-4993-B716-FF72C2309CFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EEF37DD-E09B-4993-B716-FF72C2309CFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EEF37DD-E09B-4993-B716-FF72C2309CFC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6EEF37DD-E09B-4993-B716-FF72C2309CFC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6EEF37DD-E09B-4993-B716-FF72C2309CFC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6EEF37DD-E09B-4993-B716-FF72C2309CFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EEF37DD-E09B-4993-B716-FF72C2309CFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EEF37DD-E09B-4993-B716-FF72C2309CFC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6EEF37DD-E09B-4993-B716-FF72C2309CFC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{6EEF37DD-E09B-4993-B716-FF72C2309CFC}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

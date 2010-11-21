@@ -10,8 +10,8 @@ namespace ControllersLibrary
         private const int MaxTargetPitch = 30;
         private const int MaxTargetRoll = 30;
         private const float StepTargetPitch = 0.5f;
-        private const float StepTargetYaw = 0.5f;
-        private const float StepTargetRoll = 0.5f;
+        private const float StepTargetYaw = 1.5f;
+        private const float StepTargetRoll = 1.5f;
         private const float StepTargetAltitude = 0.1f;
 
         private KeyboardState _previousState;
@@ -30,11 +30,11 @@ namespace ControllersLibrary
             {
                 if (isControlAllowed)
                 {
-                    if (state.IsKeyDown(Keys.B))
+                    if (state.IsKeyDown(Keys.Right))
                     {
                         base.TargetYaw += StepTargetYaw;
                     }
-                    else if (state.IsKeyDown(Keys.V))
+                    else if (state.IsKeyDown(Keys.Left))
                     {
                         base.TargetYaw -= StepTargetYaw;
                     }
@@ -52,11 +52,11 @@ namespace ControllersLibrary
                         base.TargetPitch = Math.Min(Math.Max(base.TargetPitch - StepTargetPitch, 0), base.TargetPitch + StepTargetPitch);
                     }
 
-                    if (state.IsKeyDown(Keys.Left))
+                    if (state.IsKeyDown(Keys.V))
                     {
                         base.TargetRoll = Math.Min(MaxTargetRoll, base.TargetRoll + StepTargetRoll);
                     }
-                    else if (state.IsKeyDown(Keys.Right))
+                    else if (state.IsKeyDown(Keys.B))
                     {
                         base.TargetRoll = Math.Max(-MaxTargetRoll, base.TargetRoll - StepTargetRoll);
                     }

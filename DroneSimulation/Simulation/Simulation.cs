@@ -18,6 +18,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ControllersLibrary.Controllers;
 using SimplySim.IO;
 using CheckPointController;
+using PlayerServer;
 
 namespace DroneSimulation
 {
@@ -26,20 +27,15 @@ namespace DroneSimulation
     /// </summary>
     class Simulation : SimplySim.Simulation.Engine.InteractionsLogic
     {
-        private const string SphereDroneName = "SphereDrone";
         private const string BoxDroneName = "BoxDrone";
-        private const string TriangleDroneName = "TriangleDrone";
 
         private const string CameraIdentifier = "Camera";
 
-        private const string SphereDroneCameraName = SphereDroneName + CameraIdentifier;
         private const string BoxDroneCameraName = BoxDroneName + CameraIdentifier;
-        private const string TriangleDroneCameraName = TriangleDroneName + CameraIdentifier;
         private const string GlobalCameraName = "Global" + CameraIdentifier;
 
-        private Drone _boxDrone, _sphereDrone, _triangleDrone;
-        private KeyBoardPIDController _sixHelixTriangleDroneController, _fourHelixBoxDroneController;
-        private CheckpointPIDController _sixHelixSphereDroneController;
+        private Drone _boxDrone;
+        private KeyBoardPIDController _fourHelixBoxDroneController;
 
         private SceneManager _scene;
 
@@ -52,17 +48,21 @@ namespace DroneSimulation
 
         private KeyboardState _previousState;
 
-        private DroneSensorsHUD _boxDroneHUD, _droneSphereHUD, _triangleDroneHUD;
+        private DroneSensorsHUD _boxDroneHUD;
+
+        private PlayerInteraction _player;
 
         /// <summary>
         /// Initializes a new instance of Simulation class with a default window and a viewport
         /// </summary>
         public Simulation(EngineWindow window)
         {
-            Path contentRoot = Path.CreateDirectory(@"..\..\..\Content").GetAbsolute();
+            Path contentRoot = Path.CreateDirectory(@"..\..\..\Content\drones").GetAbsolute();
 
             _viewport = window.AddViewport("Default", 1, 1, 0, 0, false);
             _cameras = new Dictionary<string, PerspectiveCamera>();
+
+            _player = new PlayerInteraction(3030);
 
             SimplyEnvironment env = SimplyEnvironment.Load(contentRoot + new Path("scene.env"));
 
@@ -106,46 +106,6 @@ namespace DroneSimulation
 
             _fourHelixBoxDroneController = new KeyBoardPIDController(_boxDrone, 1, worldDesc.Gravity.Length(), _droneBoxController, parameters);
 
-            // Sphere drone
-
-            List<Checkpoint> listCheckpoints = new List<Checkpoint>();
-            listCheckpoints.Add(new Checkpoint(_scene, new maths.Vector3(-2.5f, 1f, 22.5f), 0.25f, Color.Green));
-            listCheckpoints.Add(new Checkpoint(_scene, new maths.Vector3(30, 10, 30), 0.5f, Color.Green));
-            listCheckpoints.Add(new Checkpoint(_scene, new maths.Vector3(5, 20, 75), 0.5f, Color.Green));
-            listCheckpoints.Add(new Checkpoint(_scene, new maths.Vector3(60, 10, -5), 0.25f, Color.Green));
-            listCheckpoints.Add(new Checkpoint(_scene, new maths.Vector3(-2.5f, 5, 22.5f), 0.25f, Color.Green));
-            listCheckpoints.Add(new Checkpoint(_scene, new maths.Vector3(-2.5f, 1f, 22.5f), 0.1f, Color.Green));
-            listCheckpoints.Add(new Checkpoint(_scene, new maths.Vector3(-2.5f, 0.5f, 22.5f), 0.1f, Color.Green));
-            listCheckpoints.Add(new Checkpoint(_scene, new maths.Vector3(-2.5f, 0.16f, 22.5f), 0.1f, Color.Green));
-
-            _sphereDrone = new Drone(world, SphereDroneName);
-            _droneSphereHUD = new DroneSensorsHUD(_sphereDrone, window.HUDManager);
-
-            SixHelixSphereDroneCommand droneSphereController = new SixHelixSphereDroneCommand(_sphereDrone.Rotors);
-
-            altParam = new Parameter(ParameterType.Altitude, new Coefficients(1, 0.1f, 0));
-            yawParam = new Parameter(ParameterType.Yaw, new Coefficients(0.5f, 0.1f, 0));
-            pitchParam = new Parameter(ParameterType.Pitch, new Coefficients(0.5f, 0.1f, 0.05f));
-            rollParam = new Parameter(ParameterType.Roll, new Coefficients(0.5f, 0.1f, 0.05f));
-            parameters = new Parameter[] { altParam, yawParam, pitchParam, rollParam };
-
-            _sixHelixSphereDroneController = new CheckpointPIDController(_sphereDrone, 1, worldDesc.Gravity.Length(), droneSphereController, parameters, listCheckpoints);
-
-            // Triangle drone
-
-            _triangleDrone = new Drone(world, TriangleDroneName);
-            _triangleDroneHUD = new DroneSensorsHUD(_triangleDrone, window.HUDManager);
-
-            SixHelixTriangleDroneCommand _droneTriangleController = new SixHelixTriangleDroneCommand(_triangleDrone.Rotors);
-
-            altParam = new Parameter(ParameterType.Altitude, new Coefficients(1, 0.1f, 0));
-            yawParam = new Parameter(ParameterType.Yaw, new Coefficients(0.5f, 0.1f, 0));
-            pitchParam = new Parameter(ParameterType.Pitch, new Coefficients(0.5f, 0.1f, 0.05f));
-            rollParam = new Parameter(ParameterType.Roll, new Coefficients(0.5f, 0.1f, 0.05f));
-            parameters = new Parameter[] { altParam, yawParam, pitchParam, rollParam };
-
-            _sixHelixTriangleDroneController = new KeyBoardPIDController(_triangleDrone, 1, worldDesc.Gravity.Length(), _droneTriangleController, parameters);
-
             #endregion
 
             world.World.ActorAddedFiltered.Subscribe(new RegexFilter<IActor> ("[.]ComplexObject[.]Body"), BindCameras);
@@ -180,14 +140,6 @@ namespace DroneSimulation
                         break;
 
                     case BoxDroneCameraName:
-                        _actualCameraName = TriangleDroneCameraName;
-                        break;
-
-                    case TriangleDroneCameraName:
-                        _actualCameraName = SphereDroneCameraName;
-                        break;
-
-                    case SphereDroneCameraName:
                         _actualCameraName = GlobalCameraName;
                         break;
                 }
@@ -199,14 +151,12 @@ namespace DroneSimulation
             }
            
             _fourHelixBoxDroneController.Update(state, _actualCameraName == BoxDroneCameraName, (float)timeStep.TotalSeconds);
-            _sixHelixTriangleDroneController.Update(state, _actualCameraName == TriangleDroneCameraName, (float)timeStep.TotalSeconds);
-            _sixHelixSphereDroneController.Update(state, _actualCameraName == SphereDroneCameraName, (float)timeStep.TotalSeconds);
             
-            _droneSphereHUD.Update(_actualCameraName == SphereDroneCameraName);
             _boxDroneHUD.Update(_actualCameraName == BoxDroneCameraName);
-            _triangleDroneHUD.Update(_actualCameraName == TriangleDroneCameraName);
 
             _previousState = state;
+
+            _player.Update(timeStep);
 
             base.Update(timeStep, inputState);
         }

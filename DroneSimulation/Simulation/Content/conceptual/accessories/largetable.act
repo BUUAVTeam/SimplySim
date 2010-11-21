@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<Actor Mass="50" xmlns="http://www.simplysim.net/2009/12/datamodel.xsd">
+  <Elements>
+    <Element Name="LargeTable" Class="Object" Type="largetable">
+      <Translation />
+      <Rotation>
+        <Quaternion W="1" />
+      </Rotation>
+      <Scale />
+    </Element>
+  </Elements>
+  <LinearDamping X="0.1" Y="0.1" Z="0.1" />
+  <AngularDamping X="0.1" Y="0.1" Z="0.1" />
+  <Shapes>
+    <BoxShape>
+      <Position Y="0.749740958" />
+      <Orientation>
+        <Quaternion W="1" />
+      </Orientation>
+      <Dimensions X="3.99180317" Y="0.105577052" Z="1.79" />
+    </BoxShape>
+    <BoxShape>
+      <Position X="1.85245907" Y="0.0487382524" />
+      <Orientation>
+        <Quaternion W="1" />
+      </Orientation>
+      <Dimensions X="0.102362335" Y="0.102523454" />
+    </BoxShape>
+    <BoxShape>
+      <Position X="-1.84982061" Y="0.0487382524" />
+      <Orientation>
+        <Quaternion W="1" />
+      </Orientation>
+      <Dimensions X="0.102362335" Y="0.102523454" />
+    </BoxShape>
+    <BoxShape>
+      <Position X="-1.85150373" Y="0.395348847" Z="-0.00168918946" />
+      <Orientation>
+        <Quaternion W="1" />
+      </Orientation>
+      <Dimensions X="0.09746441" Y="0.5968993" Z="0.202047959" />
+    </BoxShape>
+    <BoxShape>
+      <Position X="1.85122776" Y="0.395348847" Z="-0.00168918946" />
+      <Orientation>
+        <Quaternion W="1" />
+      </Orientation>
+      <Dimensions X="0.09746441" Y="0.5968993" Z="0.202047959" />
+    </BoxShape>
+  </Shapes>
+</Actor>

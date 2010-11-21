@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<Actor Mass="0.05" xmlns="http://www.simplysim.net/2009/12/datamodel.xsd">
+  <Elements>
+    <Element Name="RightHandedBlade" Class="Object" Type="righthandedblade">
+      <Translation />
+      <Rotation>
+        <Quaternion W="0.707106769" Y="-0.707106769" />
+      </Rotation>
+      <Scale X="0.5" Y="0.5" Z="0.5" />
+    </Element>
+  </Elements>
+  <LinearDamping X="0.1" Y="0.2" Z="0.1" />
+  <AngularDamping X="0.1" Y="0.1" Z="0.1" />
+  <Shapes>
+    <BoxShape>
+      <Position />
+      <Orientation>
+        <Quaternion W="1" />
+      </Orientation>
+      <Dimensions X="0.05" Y="0.011" Z="0.36" />
+    </BoxShape>
+  </Shapes>
+</Actor>
