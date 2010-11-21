@@ -88,7 +88,7 @@ namespace ControllersLibrary
 
         private void YawControl(float timeStep)
         {
-            float yawError = TargetYaw - _drone.CurrentYaw;
+            float yawError = TargetYaw % (float)360.0 - _drone.CurrentYaw;
             if (Math.Abs(yawError) > 180)
             {
                 yawError = 360 - Math.Abs(yawError);
