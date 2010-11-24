@@ -15,6 +15,7 @@ namespace DroneLibrary
     public class Drone
     {
         private IDynamicActor _body;
+        private LIDAR _LIDAR;
         private Dictionary<string, Rotor> _dictionaryRotors;
 
         public Drone(WorldHandle world, string name)
@@ -28,6 +29,8 @@ namespace DroneLibrary
                 Rotor r = new Rotor(world.World, rotorSpecified, name);
                 _dictionaryRotors.Add(rotorSpecified.Name, r);
             }
+            _LIDAR = new LIDAR(world, name);
+
             world.World.ActorAddedFiltered.Subscribe(new RegexFilter<IActor>(name + "[.]ComplexObject[.]" + config.BodyName), BindActor);
         }
 
@@ -116,6 +119,7 @@ namespace DroneLibrary
         private void BindActor(Object sender, EventArgs<IActor> args)
         {
             _body = (IDynamicActor)args.Item;
+           // _LIDAR.BindActor(sender, args);
         }
     }
 }

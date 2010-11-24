@@ -11,10 +11,15 @@ namespace PlayerServer
     {
         private IPAddress ipAddress;
         private TcpListener listener;
+        private TcpClient player_client;
         private Socket s;
+        private bool connectFlag;
+        private byte[] send_buffer;
 
         public PlayerInteraction(int port)
         {
+            connectFlag = false;
+            send_buffer = new byte[1000];
             ipAddress = IPAddress.Any;
             listener = new TcpListener(ipAddress, port);
             listener.Start();
@@ -25,16 +30,23 @@ namespace PlayerServer
 
         public void Update(TimeSpan time)
         {
-            if(listener.Pending() && s != null && !s.Connected)
+            if(!connectFlag && listener.Pending())
             {
-                s = listener.AcceptSocket();
+                player_client = listener.AcceptTcpClient();
                 Console.WriteLine("Accepted Server Connection");
                 s.Blocking = false;
+                NetworkStream player_stream = player_client.GetStream();
+                ASCIIEncoding test;
+                connectFlag = true;
             }
-            if (s != null && s.Connected)
+            if (connectFlag && s.Connected)
             {
                 Console.WriteLine("Connected");
-
+            }
+            if (connectFlag && !s.Connected)
+            {
+                connectFlag = false;
+                Console.WriteLine("Disconnected from Server");
             }
 
         }

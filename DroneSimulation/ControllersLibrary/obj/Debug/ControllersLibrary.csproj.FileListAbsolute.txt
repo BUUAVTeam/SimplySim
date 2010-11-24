@@ -5,10 +5,10 @@ C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\ControllersLibrary\bin\Deb
 C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\ControllersLibrary\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\ControllersLibrary\obj\Debug\ControllersLibrary.dll
 C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\ControllersLibrary\obj\Debug\ControllersLibrary.pdb
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\ControllersLibrary\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\ControllersLibrary\bin\Debug\ControllersLibrary.dll
 C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\ControllersLibrary\bin\Debug\ControllersLibrary.pdb
 C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\ControllersLibrary\bin\Debug\Drone Library.dll
 C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\ControllersLibrary\bin\Debug\Drone Library.pdb
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\ControllersLibrary\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\ControllersLibrary\obj\Debug\ControllersLibrary.dll
 C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\ControllersLibrary\obj\Debug\ControllersLibrary.pdb

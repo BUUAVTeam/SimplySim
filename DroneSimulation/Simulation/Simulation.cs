@@ -108,6 +108,8 @@ namespace DroneSimulation
 
             #endregion
 
+            
+
             world.World.ActorAddedFiltered.Subscribe(new RegexFilter<IActor> ("[.]ComplexObject[.]Body"), BindCameras);
 
 
