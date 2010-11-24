@@ -6,6 +6,7 @@ using SimplySim.DataModel;
 using SimplySim.Dynamics;
 using SimplySim.Xml;
 using SimplySim.IO;
+using PlayerServer;
 
 using maths = SimplySim.Math;
 using SimplySim.Xna.Engine;
@@ -17,10 +18,12 @@ namespace DroneLibrary
         private IDynamicActor _body;
         private LIDAR _LIDAR;
         private Dictionary<string, Rotor> _dictionaryRotors;
+        private PlayerInteraction _player;
 
-        public Drone(WorldHandle world, string name)
+        public Drone(WorldHandle world, string name, PlayerInteraction Player)
         {
             DroneConfig config = Serializer.Instance.Deserialize<DroneConfig>(new Path(name + ".drs"));
+            _player = Player;
 
             _dictionaryRotors = new Dictionary<string, Rotor>();
 
@@ -29,7 +32,7 @@ namespace DroneLibrary
                 Rotor r = new Rotor(world.World, rotorSpecified, name);
                 _dictionaryRotors.Add(rotorSpecified.Name, r);
             }
-            _LIDAR = new LIDAR(world, name);
+            _LIDAR = new LIDAR(world, name,_player);
 
             world.World.ActorAddedFiltered.Subscribe(new RegexFilter<IActor>(name + "[.]ComplexObject[.]" + config.BodyName), BindActor);
         }

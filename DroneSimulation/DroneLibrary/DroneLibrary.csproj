@@ -67,6 +67,12 @@
   <ItemGroup>
     <None Include="DroneConfig.xsd" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\PlayerServer\PlayerServer.csproj">
+      <Project>{6EEF37DD-E09B-4993-B716-FF72C2309CFC}</Project>
+      <Name>PlayerServer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -3,8 +3,10 @@ C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\DroneLibrary\bin\Debug\Dro
 C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\DroneLibrary\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\DroneLibrary\obj\Debug\Drone Library.dll
 C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\DroneLibrary\obj\Debug\Drone Library.pdb
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\DroneLibrary\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\DroneLibrary\bin\Debug\Drone Library.dll
 C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\DroneLibrary\bin\Debug\Drone Library.pdb
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\DroneLibrary\bin\Debug\PlayerServer.dll
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\DroneLibrary\bin\Debug\PlayerServer.pdb
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\DroneLibrary\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\DroneLibrary\obj\Debug\Drone Library.dll
 C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\DroneLibrary\obj\Debug\Drone Library.pdb

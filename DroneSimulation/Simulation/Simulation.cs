@@ -93,7 +93,7 @@ namespace DroneSimulation
 
             // Box drone
 
-            _boxDrone = new Drone(world, BoxDroneName);
+            _boxDrone = new Drone(world, BoxDroneName, _player);
             _boxDroneHUD = new DroneSensorsHUD(_boxDrone, window.HUDManager);
 
             FourHelixBoxDroneCommand _droneBoxController = new FourHelixBoxDroneCommand(_boxDrone.Rotors);

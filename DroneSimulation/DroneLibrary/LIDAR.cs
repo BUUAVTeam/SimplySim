@@ -6,6 +6,7 @@ using SimplySim.Dynamics;
 using SimplySim.Simulation.Engine;
 using SimplySim.Events;
 using SimplySim.Math;
+using PlayerServer;
 
 namespace DroneLibrary
 {
@@ -18,21 +19,21 @@ namespace DroneLibrary
         private RayHit result;
         private Vector3[] rayVec;
         private Vector3 origin;
-        private float timeInt;
-        private float[] lidar_results;
+        private PlayerInteraction _player;
+        private int curr;
 
-        public LIDAR(WorldHandle world, string name)
+        public LIDAR(WorldHandle world, string name, PlayerInteraction Player)
         {
             //Register to actor insertion
             _name = "LIDAR" + Guid.NewGuid().ToString();
+            _player = Player;
             world.World.ActorAddedFiltered.Subscribe(new RegexFilter<IActor>("[.]ComplexObject[.]Body"), BindActor);
             world.World.AddActuator(this);
             _world = world.World;
             desc = new RayDesc();
-            timeInt = 0;
             origin = new Vector3(0, 1, 0);
             rayVec = new Vector3[1081];
-            lidar_results = new float[1081];
+            curr = -1;
             int index = 0;
             for (double i = -45.0; i <= 225; i += 0.25)
             {
@@ -43,25 +44,39 @@ namespace DroneLibrary
 
         public void Update(float time)
         {
-            Console.WriteLine("Time Interval: " + time.ToString());
-            
-            try{
+            try
+            {
                 if (_actor != null)
                 {
-                    for (int i = 0; i < rayVec.Length; i++)
+                    int thisIt = (int)(time * 10810.0);
+                    int i;
+                    for (i = 1; i <= thisIt; i++)
                     {
+                        if ((curr + i) >= rayVec.Length)
+                        {
+                            curr = -1;
+                            _player.publishLIDAR();
+                            return;
+                        }
                         desc.Origin = _actor.WorldPose * origin; //Origin offset Transform
-                        desc.Direction = _actor.WorldPose.Matrix * rayVec[i];
+                        desc.Direction = _actor.WorldPose.Matrix * rayVec[i+curr];
                         result = _world.RayCastClosest(desc);
                         if (result != null)
-                            lidar_results[i] = (result.Distance > 30 ? 30 : result.Distance);
+                            _player.saveLIDAR((result.Distance > 30 ? 30 : result.Distance),(curr+i));
                     }
+                    curr += i;
                 }
-            }catch(SystemException e)
+            }
+            catch (SystemException e)
             {
                 Console.WriteLine("Exception: " + e.ToString());
                 return;
             }
+        }
+        private void publish()
+        {
+
+            return;
 
         }
 
