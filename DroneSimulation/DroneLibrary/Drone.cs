@@ -32,7 +32,7 @@ namespace DroneLibrary
                 Rotor r = new Rotor(world.World, rotorSpecified, name);
                 _dictionaryRotors.Add(rotorSpecified.Name, r);
             }
-            _LIDAR = new LIDAR(world, name,_player);
+            _LIDAR = new LIDAR(world, name,_player, this);
 
             world.World.ActorAddedFiltered.Subscribe(new RegexFilter<IActor>(name + "[.]ComplexObject[.]" + config.BodyName), BindActor);
         }
