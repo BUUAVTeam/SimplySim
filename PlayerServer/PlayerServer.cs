@@ -87,11 +87,14 @@ namespace PlayerServer
 
                     //Write IMU & GPS Data
                     player_stream.Write(_encoder.GetBytes("POS2D"), 0, _encoder.GetByteCount("POS2D"));
-                    byte[] yaw = BitConverter.GetBytes(IPAddress.HostToNetworkOrder((int)(_yaw * (float)1000)));
+                    byte[] yaw = BitConverter.GetBytes(IPAddress.HostToNetworkOrder((int)(Math.Abs(_yaw) * (float)1000)));
                     player_stream.Write(yaw, 0, 4);
-                    byte[] xpos = BitConverter.GetBytes(IPAddress.HostToNetworkOrder((int)(_pos.X * (float)1000)));
+                    byte[] xpos = BitConverter.GetBytes(IPAddress.HostToNetworkOrder((int)(Math.Abs(_pos.X) * (float)1000)));
+                    //if (_pos.X < 0)
+                     //   xpos[0] |= 0x80;
+          
                     player_stream.Write(xpos, 0, 4);
-                    byte[] ypos = BitConverter.GetBytes(IPAddress.HostToNetworkOrder((int)(_pos.Y * (float)1000)));
+                    byte[] ypos = BitConverter.GetBytes(IPAddress.HostToNetworkOrder((int)(Math.Abs(_pos.Z) * (float)1000)));
                     player_stream.Write(ypos, 0, 4);
 
                 }

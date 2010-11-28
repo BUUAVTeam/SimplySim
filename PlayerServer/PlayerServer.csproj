@@ -29,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="SimplySim.Math, Version=0.9.9.0, Culture=neutral, PublicKeyToken=12773afd9b48daf5, processorArchitecture=MSIL" />
