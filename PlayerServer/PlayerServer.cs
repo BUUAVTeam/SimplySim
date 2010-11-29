@@ -98,10 +98,9 @@ namespace PlayerServer
             if (connectFlag && player_stream.DataAvailable)
             {
                 byte[] recv_buffer = new byte[256];
-                if ((_recvd = player_stream.Read(recv_buffer, 0, 256)) < 20)
-                    throw new SocketException();
+                _recvd = player_stream.Read(recv_buffer, 0, 256);
                 string msg = _encoder.GetString(recv_buffer);
-                if (msg.CompareTo("VELC") == 0)
+                if (msg.Substring(0,4).CompareTo("VELC") == 0)
                 {
                     //Console.WriteLine("GOT START TAG");//receive vel command data;
                     //recvd = player_stream.Read(recv_buffer, 0, 16);
@@ -113,7 +112,7 @@ namespace PlayerServer
                 }
                 else
                 {
-                    Console.WriteLine("Unknown Message: " + msg + " ");
+                    Console.WriteLine("Unknown 00 Message: " + " Len: " + _recvd.ToString() + " ");
                 }
             }     
         }
