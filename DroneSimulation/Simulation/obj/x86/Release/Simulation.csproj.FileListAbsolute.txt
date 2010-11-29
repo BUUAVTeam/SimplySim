@@ -13,20 +13,3 @@ C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\Simulation\bin\x86\Release
 C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\Simulation\obj\x86\Release\ResolveAssemblyReference.cache
 C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\Simulation\obj\x86\Release\Drone Simulation.exe
 C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\Simulation\obj\x86\Release\Drone Simulation.pdb
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Release\Config\EngineConfig.xml
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Release\BoxDrone.drs
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Release\SphereDrone.drs
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Release\TriangleDrone.drs
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Release\Drone Simulation.exe
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Release\Drone Simulation.pdb
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Release\CheckPointController.dll
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Release\ControllersLibrary.dll
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Release\Drone Library.dll
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Release\PlayerServer.dll
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Release\PlayerServer.pdb
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Release\CheckPointController.pdb
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Release\ControllersLibrary.pdb
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Release\Drone Library.pdb
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\obj\x86\Release\ResolveAssemblyReference.cache
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\obj\x86\Release\Drone Simulation.exe
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\obj\x86\Release\Drone Simulation.pdb
