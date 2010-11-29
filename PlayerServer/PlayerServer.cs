@@ -19,6 +19,9 @@ namespace PlayerServer
         private byte[] send_buffer;
         private short[] _lidarData;
         private bool _newLidar;
+
+        private int _recvd;
+
         private ASCIIEncoding _encoder;
         private maths.Vector3 _pos;
         private bool _contBind;
@@ -95,17 +98,21 @@ namespace PlayerServer
             if (connectFlag && player_stream.DataAvailable)
             {
                 byte[] recv_buffer = new byte[256];
-                int recvd = player_stream.Read(recv_buffer, 0, 5);
+                _recvd = player_stream.Read(recv_buffer, 0, 256);
                 string msg = _encoder.GetString(recv_buffer);
-                if (msg.CompareTo("VELCM") == 0)
+                if (msg.Substring(0,4).CompareTo("VELC") == 0)
                 {
                     //Console.WriteLine("GOT START TAG");//receive vel command data;
-                    recvd = player_stream.Read(recv_buffer, 0, 16);
-                    _pyrD.X = (float)(BitConverter.ToInt32(recv_buffer, 0) / 1000.0); //Pitch
-                    _pyrD.Y = -(float)(BitConverter.ToInt32(recv_buffer, 4) / 1000.0); //Yaw
-                    _pyrD.Z = (float)(BitConverter.ToInt32(recv_buffer, 8) / 1000.0); //Roll
-                    _deltaZ = (float)(BitConverter.ToInt32(recv_buffer, 12) / 1000.0); //DeltaZ
+                    //recvd = player_stream.Read(recv_buffer, 0, 16);
+                    _pyrD.X = (float)(BitConverter.ToInt32(recv_buffer, 4) / 1000.0); //Pitch
+                    _pyrD.Y = -(float)(BitConverter.ToInt32(recv_buffer, 8) / 1000.0); //Yaw
+                    _pyrD.Z = (float)(BitConverter.ToInt32(recv_buffer, 12) / 1000.0); //Roll
+                    _deltaZ = (float)(BitConverter.ToInt32(recv_buffer, 16) / 1000.0); //DeltaZ
                     controlUpdate = true;
+                }
+                else
+                {
+                    Console.WriteLine("Unknown 00 Message: " + " Len: " + _recvd.ToString() + " ");
                 }
             }     
         }
