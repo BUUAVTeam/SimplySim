@@ -118,6 +118,39 @@ namespace DroneLibrary
                 return _body.WorldPose.Translation;
             }
         }
+        public maths.Vector3 XYZAc
+        {
+            get
+            {
+                if (!IsInitialized)
+                {
+                    throw new InvalidOperationException("Drone not initialized!");
+                }
+                return _body.LocalInertia.Up;
+            }
+        }
+        public maths.Vector3 anglularV
+        {
+            get
+            {
+                if (!IsInitialized)
+                {
+                    throw new InvalidOperationException("Drone is not initialized!");
+                }
+                return _body.LocalAngularVelocity;
+            }
+        }
+        public maths.Vector3 velocity
+        {
+            get
+            {
+                if (!IsInitialized)
+                {
+                    throw new InvalidOperationException("Drone not initialized!");
+                }
+                return _body.LocalLinearVelocity;
+            }
+        }
 
         private void BindActor(Object sender, EventArgs<IActor> args)
         {

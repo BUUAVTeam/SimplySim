@@ -8,6 +8,7 @@ using ControllersLibrary;
 using DroneLibrary;
 using ControllersLibrary.Controllers;
 using SimplySim.Xna.Engine;
+using SimplySim.Dynamics;
 
 namespace CheckPointController
 {

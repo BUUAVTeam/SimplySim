@@ -55,6 +55,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework, Version=3.1.0.0, Culture=neutral, PublicKeyToken=6d5c3888ef60e27d, processorArchitecture=x86" />
+    <Reference Include="SimplySim.Dynamics, Version=0.9.5.0, Culture=neutral, PublicKeyToken=12773afd9b48daf5, processorArchitecture=MSIL" />
     <Reference Include="SimplySim.Events, Version=0.9.5.0, Culture=neutral, PublicKeyToken=12773afd9b48daf5, processorArchitecture=MSIL" />
     <Reference Include="SimplySim.Math, Version=0.9.9.0, Culture=neutral, PublicKeyToken=12773afd9b48daf5, processorArchitecture=MSIL" />
     <Reference Include="SimplySim.Xna.Engine, Version=0.9.5.0, Culture=neutral, PublicKeyToken=12773afd9b48daf5, processorArchitecture=x86" />
