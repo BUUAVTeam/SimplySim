@@ -95,16 +95,16 @@ namespace PlayerServer
             if (connectFlag && player_stream.DataAvailable)
             {
                 byte[] recv_buffer = new byte[256];
-                int recvd = player_stream.Read(recv_buffer, 0, 5);
+                int recvd = player_stream.Read(recv_buffer, 0, 256);
                 string msg = _encoder.GetString(recv_buffer);
                 if (msg.CompareTo("VELCM") == 0)
                 {
                     //Console.WriteLine("GOT START TAG");//receive vel command data;
                     recvd = player_stream.Read(recv_buffer, 0, 16);
-                    _pyrD.X = (float)(BitConverter.ToInt32(recv_buffer, 0) / 1000.0); //Pitch
-                    _pyrD.Y = -(float)(BitConverter.ToInt32(recv_buffer, 4) / 1000.0); //Yaw
-                    _pyrD.Z = (float)(BitConverter.ToInt32(recv_buffer, 8) / 1000.0); //Roll
-                    _deltaZ = (float)(BitConverter.ToInt32(recv_buffer, 12) / 1000.0); //DeltaZ
+                    _pyrD.X = (float)(BitConverter.ToInt32(recv_buffer, 5) / 1000.0); //Pitch
+                    _pyrD.Y = -(float)(BitConverter.ToInt32(recv_buffer, 9) / 1000.0); //Yaw
+                    _pyrD.Z = (float)(BitConverter.ToInt32(recv_buffer, 13) / 1000.0); //Roll
+                    _deltaZ = (float)(BitConverter.ToInt32(recv_buffer, 17) / 1000.0); //DeltaZ
                     controlUpdate = true;
                 }
             }     
