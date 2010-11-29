@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\Coefficients.cs" />
     <Compile Include="DroneCommands\AbstractDroneCommand.cs" />
     <Compile Include="DroneCommands\FourHelixBoxDroneCommand.cs" />
@@ -61,6 +62,10 @@
     <Compile Include="DroneCommands\SixHelixTriangleDroneCommand.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\PlayerServer\PlayerServer.csproj">
+      <Project>{6EEF37DD-E09B-4993-B716-FF72C2309CFC}</Project>
+      <Name>PlayerServer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DroneLibrary\DroneLibrary.csproj">
       <Project>{21293953-3EA1-44AE-9577-61F0D31036E8}</Project>
       <Name>DroneLibrary</Name>

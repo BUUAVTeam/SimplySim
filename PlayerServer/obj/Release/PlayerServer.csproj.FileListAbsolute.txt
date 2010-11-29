@@ -1,5 +1,0 @@
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\PlayerServer\bin\Release\PlayerServer.dll
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\PlayerServer\bin\Release\PlayerServer.pdb
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\PlayerServer\obj\Release\ResolveAssemblyReference.cache
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\PlayerServer\obj\Release\PlayerServer.dll
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\PlayerServer\obj\Release\PlayerServer.pdb

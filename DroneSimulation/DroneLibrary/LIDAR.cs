@@ -55,7 +55,7 @@ namespace DroneLibrary
                     {
                         //Origin offset Transform
                         desc.Direction = _actor.WorldPose.Matrix * rayVec[i];
-                        //result = _world.RayCastClosest(desc);
+                        result = _world.RayCastClosest(desc);
                         if (result == null)
                             _player.saveLIDAR(30, i);
                         else

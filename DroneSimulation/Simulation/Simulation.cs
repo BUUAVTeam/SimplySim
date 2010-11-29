@@ -35,7 +35,7 @@ namespace DroneSimulation
         private const string GlobalCameraName = "Global" + CameraIdentifier;
 
         private Drone _boxDrone;
-        private KeyBoardPIDController _fourHelixBoxDroneController;
+        private PlayerController _fourHelixBoxDroneController;
 
         private SceneManager _scene;
 
@@ -103,9 +103,9 @@ namespace DroneSimulation
             Parameter pitchParam = new Parameter(ParameterType.Pitch, new Coefficients(0.3f, 0.05f, 0.05f));
             Parameter rollParam = new Parameter(ParameterType.Roll, new Coefficients(0.3f, 0.05f, 0.05f));
             Parameter[] parameters = new Parameter[] { altParam, yawParam, pitchParam, rollParam };
-
-            _fourHelixBoxDroneController = new KeyBoardPIDController(_boxDrone, 1, worldDesc.Gravity.Length(), _droneBoxController, parameters);
-
+            
+            //_fourHelixBoxDroneController = new KeyBoardPIDController(_boxDrone, 1, worldDesc.Gravity.Length(), _droneBoxController, parameters);
+            _fourHelixBoxDroneController = new PlayerController(_player, _boxDrone, 1, worldDesc.Gravity.Length(), _droneBoxController, parameters);
             #endregion
 
             
@@ -152,7 +152,7 @@ namespace DroneSimulation
                 }
             }
            
-            _fourHelixBoxDroneController.Update(state, _actualCameraName == BoxDroneCameraName, (float)timeStep.TotalSeconds);
+            _fourHelixBoxDroneController.Update((float)timeStep.TotalSeconds);
             
             _boxDroneHUD.Update(_actualCameraName == BoxDroneCameraName);
 

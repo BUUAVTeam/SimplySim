@@ -20,12 +20,16 @@ namespace PlayerServer
         private short[] _lidarData;
         private bool _newLidar;
         private ASCIIEncoding _encoder;
-        private float _pitch, _yaw, _roll;
         private maths.Vector3 _pos;
+        private bool _contBind;
+        public bool controlUpdate;
+        private float _deltaZ, _yaw;
+        private maths.Vector3 _pyrD, _pyrIMU;
 
         public PlayerInteraction(int port)
         {
             connectFlag = false;
+            _contBind = false;
             _newLidar = false;
             _encoder = new ASCIIEncoding();
             _lidarData = new short[1081];
@@ -37,28 +41,6 @@ namespace PlayerServer
             Console.WriteLine("Waiting for Player connections...");
 
         }
-        public void setIMU(float pitch, float yaw, float roll)
-        {
-            _pitch = pitch;
-            _yaw = (yaw < 0 ? yaw + 360 : yaw);
-            _roll = roll;
-            return;
-        }
-        public void setGPS(maths.Vector3 pos)
-        {
-            _pos = pos;
-            return;
-        }
-        public void saveLIDAR(float range, int index)
-        {
-            _lidarData[index] = (short)(range*100.0);
-            return;
-        }
-        public void publishLIDAR()
-        {
-            _newLidar = true;
-            return;
-        }
 
         public void Update(TimeSpan time)
         {
@@ -67,7 +49,10 @@ namespace PlayerServer
                 player_client = listener.AcceptTcpClient();
                 Console.WriteLine("Accepted Server Connection");
                 player_stream = player_client.GetStream();
+
                 connectFlag = true;
+                
+                _contBind = true;
             }
             if (connectFlag && player_stream.CanWrite && _newLidar)
             {
@@ -107,7 +92,55 @@ namespace PlayerServer
                 _newLidar = false;
             }
 
+            if (connectFlag && player_stream.DataAvailable)
+            {
+                byte[] recv_buffer = new byte[256];
+                int recvd = player_stream.Read(recv_buffer, 0, 5);
+                string msg = _encoder.GetString(recv_buffer);
+                if (msg.CompareTo("VELCM") == 0)
+                {
+                    //Console.WriteLine("GOT START TAG");//receive vel command data;
+                    recvd = player_stream.Read(recv_buffer, 0, 16);
+                    _pyrD.X = (float)(BitConverter.ToInt32(recv_buffer, 0) / 1000.0); //Pitch
+                    _pyrD.Y = -(float)(BitConverter.ToInt32(recv_buffer, 4) / 1000.0); //Yaw
+                    _pyrD.Z = (float)(BitConverter.ToInt32(recv_buffer, 8) / 1000.0); //Roll
+                    _deltaZ = (float)(BitConverter.ToInt32(recv_buffer, 12) / 1000.0); //DeltaZ
+                    controlUpdate = true;
+                }
+            }     
         }
+
+        public void setIMU(float pitch, float yaw, float roll)
+        {
+            _pyrIMU.X = pitch;
+            _pyrIMU.Y = (yaw < 0 ? yaw + 360 : yaw);
+            _pyrIMU.Z = roll;
+            return;
+        }
+
+        public void setGPS(maths.Vector3 pos)
+        {
+            _pos = pos;
+            return;
+        }
+
+        public void saveLIDAR(float range, int index)
+        {
+            _lidarData[index] = (short)(range * 100.0);
+            return;
+        }
+
+        public void publishLIDAR()
+        {
+            _newLidar = true;
+            return;
+        }
+
+        public maths.Vector3 pyrD { get { return _pyrD; } }
+
+        public float deltaZ { get { return _deltaZ; } }
+
+        public bool contBind { get { return _contBind; } }
 
     }
 }

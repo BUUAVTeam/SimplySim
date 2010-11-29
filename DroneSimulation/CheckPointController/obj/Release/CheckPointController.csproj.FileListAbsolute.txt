@@ -3,8 +3,3 @@ C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\CheckPointController\obj\R
 C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\CheckPointController\obj\Release\CheckPointController.pdb
 C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\CheckPointController.dll
 C:\Users\Ryan\Desktop\DroneSimulation\DroneSimulation\CheckPointController.pdb
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\CheckPointController\obj\Release\ResolveAssemblyReference.cache
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\CheckPointController\obj\Release\CheckPointController.dll
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\CheckPointController\obj\Release\CheckPointController.pdb
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\CheckPointController.dll
-C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\CheckPointController.pdb
