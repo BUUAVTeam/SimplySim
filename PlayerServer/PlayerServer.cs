@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using maths = SimplySim.Math;
+using System.Threading;
 
 namespace PlayerServer
 {
@@ -16,27 +17,32 @@ namespace PlayerServer
         private TcpClient player_client;
         private NetworkStream player_stream;
         private bool connectFlag;
-        private byte[] send_buffer;
         private short[] _lidarData;
-        private bool _newLidar;
+        public bool newLidar, newPos;
 
-        private int _recvd;
+        private Thread sendThread;
+
 
         private ASCIIEncoding _encoder;
         private maths.Vector3 _pos;
         private bool _contBind;
         public bool controlUpdate;
-        private float _deltaZ, _yaw;
-        private maths.Vector3 _pyrD, _pyrIMU;
-
+        public float _deltaZ, _yaw;
+        public bool Lidar, Pos, Writing, Publish;
+        public maths.Vector3 _pyrD, _pyrIMU;
         public PlayerInteraction(int port)
         {
             connectFlag = false;
             _contBind = false;
-            _newLidar = false;
+            Pos = false;
+            Lidar = false;
+            Writing = false;
+            newLidar = false;
+            newPos = false;
+            Publish = false;
             _encoder = new ASCIIEncoding();
             _lidarData = new short[1081];
-            send_buffer = new byte[2162];
+            
             ipAddress = IPAddress.Any;
             listener = new TcpListener(ipAddress, port);
             listener.Start();
@@ -47,6 +53,8 @@ namespace PlayerServer
 
         public void Update(TimeSpan time)
         {
+            if(player_stream == null)
+                connectFlag = false;
             if(!connectFlag && listener.Pending())
             {
                 player_client = listener.AcceptTcpClient();
@@ -57,34 +65,20 @@ namespace PlayerServer
                 
                 _contBind = true;
             }
-            if (connectFlag && player_stream.CanWrite && _newLidar)
+            if (connectFlag && player_stream.CanWrite && (newLidar || newPos))
             {
                 try
                 {
-                    player_stream.Write(_encoder.GetBytes("LASER"), 0, _encoder.GetByteCount("LASER"));
-                    int x = 0;
-                    foreach (short f in _lidarData)
+                    if (sendThread == null || !sendThread.IsAlive)
                     {
-                        //Console.WriteLine("range: " + f.ToString());
-                        byte[] temp = BitConverter.GetBytes(IPAddress.HostToNetworkOrder(f));
-                        for (int y = 0; y < 2; y++)
-                            send_buffer[y + x] = temp[y];
-                        x += 2;
+                        DataRecieve sendData = new DataRecieve(player_stream, (newLidar ? _lidarData : null), 
+                            (newPos ? _pos : new maths.Vector3(-1000,-1000,-1000)), (newPos ? _yaw : -1000f));
+                        sendThread = new Thread(new ThreadStart(sendData.sendData));
+                        sendThread.Start();
+                        newLidar = false;
+                        newPos = false;
+                        Writing = true;
                     }
-                    player_stream.Write(send_buffer, 0, 2162);
-
-                    //Write IMU & GPS Data
-                    player_stream.Write(_encoder.GetBytes("POS3D"), 0, _encoder.GetByteCount("POS3D"));
-                    byte[] yaw = BitConverter.GetBytes(IPAddress.HostToNetworkOrder((int)(Math.Abs(_yaw) * (float)1000)));
-                    player_stream.Write(yaw, 0, 4);
-                    byte[] xpos = BitConverter.GetBytes(IPAddress.HostToNetworkOrder((int)(Math.Abs(_pos.X) * (float)1000)));
-                    //if (_pos.X < 0)
-                     //   xpos[0] |= 0x80;
-          
-                    player_stream.Write(xpos, 0, 4);
-                    byte[] ypos = BitConverter.GetBytes(IPAddress.HostToNetworkOrder((int)(Math.Abs(_pos.Z) * (float)1000)));
-                    player_stream.Write(ypos, 0, 4);
-
                 }
                 catch (IOException e)
                 {
@@ -92,29 +86,24 @@ namespace PlayerServer
                     connectFlag = false;
                     return;
                 }
-                _newLidar = false;
+            }
+
+            if (connectFlag && !player_stream.CanRead)
+            {
+                connectFlag = false;
             }
 
             if (connectFlag && player_stream.DataAvailable)
             {
-                byte[] recv_buffer = new byte[256];
-                _recvd = player_stream.Read(recv_buffer, 0, 256);
-                string msg = _encoder.GetString(recv_buffer);
-                if (msg.Substring(0,4).CompareTo("VELC") == 0)
-                {
-                    //Console.WriteLine("GOT START TAG");//receive vel command data;
-                    //recvd = player_stream.Read(recv_buffer, 0, 16);
-                    _pyrD.X = (float)(BitConverter.ToInt32(recv_buffer, 4) / 1000.0); //Pitch
-                    _pyrD.Y = -(float)(BitConverter.ToInt32(recv_buffer, 8) / 1000.0); //Yaw
-                    _pyrD.Z = (float)(BitConverter.ToInt32(recv_buffer, 12) / 1000.0); //Roll
-                    _deltaZ = (float)(BitConverter.ToInt32(recv_buffer, 16) / 1000.0); //DeltaZ
-                    controlUpdate = true;
-                }
-                else
-                {
-                    Console.WriteLine("Unknown 00 Message: " + " Len: " + _recvd.ToString() + " ");
-                }
-            }     
+                DataRecieve getData = new DataRecieve(player_stream, this);
+                Thread getDataThread = new Thread(new ThreadStart(getData.getData));
+                getDataThread.Start();
+                
+            }
+            if (sendThread != null && !sendThread.IsAlive)
+            {
+                Writing = false;
+            }
         }
 
         public void setIMU(float pitch, float yaw, float roll)
@@ -134,12 +123,6 @@ namespace PlayerServer
         public void saveLIDAR(float range, int index)
         {
             _lidarData[index] = (short)(range * 100.0);
-            return;
-        }
-
-        public void publishLIDAR()
-        {
-            _newLidar = true;
             return;
         }
 

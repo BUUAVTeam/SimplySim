@@ -12,9 +12,15 @@ namespace ControllersLibrary
 
         public override void AltitudeCommand(float altitudeTarget)
         {
+            bool iSet = true;
             foreach (Rotor rotor in DroneRotors.Values)
             {
                 rotor.TargetRPM = ComputeRPMCorrection(altitudeTarget, rotor.Lift, DroneRotors.Count);
+                if (iSet)
+                {
+                    //rotor.TargetRPM = 0;
+                    iSet = false;
+                }
             }
         }
 

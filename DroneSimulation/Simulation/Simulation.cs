@@ -100,8 +100,8 @@ namespace DroneSimulation
 
             Parameter altParam = new Parameter(ParameterType.Altitude, new Coefficients(1, 0.1f, 0));
             Parameter yawParam = new Parameter(ParameterType.Yaw, new Coefficients(0.5f, 0.1f, 0));
-            Parameter pitchParam = new Parameter(ParameterType.Pitch, new Coefficients(0.3f, 0.05f, 0.05f));
-            Parameter rollParam = new Parameter(ParameterType.Roll, new Coefficients(0.3f, 0.05f, 0.05f));
+            Parameter pitchParam = new Parameter(ParameterType.Pitch, new Coefficients(0.1f, 0.05f, 0.05f));
+            Parameter rollParam = new Parameter(ParameterType.Roll, new Coefficients(0.1f, 0.05f, 0.05f));
             Parameter[] parameters = new Parameter[] { altParam, yawParam, pitchParam, rollParam };
             
             //_fourHelixBoxDroneController = new KeyBoardPIDController(_boxDrone, 1, worldDesc.Gravity.Length(), _droneBoxController, parameters);
@@ -125,9 +125,9 @@ namespace DroneSimulation
             KeyboardState state = Keyboard.GetState();
 
             //// Enables/Disables SSAO
-            if (_ssaoComponent != null && state.IsKeyUp(Keys.S) && _previousState.IsKeyDown(Keys.S))
+            if (_ssaoComponent != null && _ssaoComponent.IsActive)
             {
-                _ssaoComponent.IsActive = !_ssaoComponent.IsActive;
+                _ssaoComponent.IsActive = false;
             }
 
             //Switch camera

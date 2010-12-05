@@ -12,11 +12,11 @@ namespace ControllersLibrary
 {
     public class PlayerController : SimplePIDController
     {
-        private bool _isStarted;
         private Drone _drone;
         private PlayerInteraction _player;
         private double _deltaZ, _deltaYaw;
         private AbstractDroneCommand _command;
+        private float _gravity;
 
         public PlayerController(PlayerInteraction player, Drone drone, float mass, float gravity, AbstractDroneCommand droneCommand, Parameter[] parameters) 
             : base (drone, mass, gravity, droneCommand, parameters)
@@ -25,7 +25,7 @@ namespace ControllersLibrary
             _player = player;
             _deltaZ = 0;
             _drone = drone;
-            _isStarted = false;
+            _gravity = gravity;
             return;
         }
 
@@ -33,6 +33,14 @@ namespace ControllersLibrary
         {
             if (_drone.IsInitialized)
             {
+                if (!_player.Pos && _command.motorStart)
+                {
+                    _command.StopEngines();
+                }
+                else if (_player.Pos && !_command.motorStart)
+                {
+                    _command.StartEngines(_gravity);
+                }
                 if (_player.contBind)
                 {
                     if (_player.controlUpdate)

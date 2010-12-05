@@ -26,22 +26,22 @@ namespace DroneSimulation
             _enginesTexts = new Dictionary<Rotor, HUDText>();
             _statusTexts = new List<HUDText>();
 
-            _positionText = new HUDText(new Vector2(5, 5), String.Empty, Color.White);
+            _positionText = new HUDText(new Vector2(5, 5), String.Empty, Color.Black);
             _hudManager.AddElement(_positionText);
 
-            _altitudeText = new HUDText(new Vector2(5, 20), String.Empty, Color.White);
+            _altitudeText = new HUDText(new Vector2(5, 20), String.Empty, Color.Black);
             _hudManager.AddElement(_altitudeText);
 
-            _yawText = new HUDText(new Vector2(5, 35), String.Empty, Color.White);
+            _yawText = new HUDText(new Vector2(5, 35), String.Empty, Color.Black);
             _hudManager.AddElement(_yawText);
 
-            _pitchText = new HUDText(new Vector2(5, 50), String.Empty, Color.White);
+            _pitchText = new HUDText(new Vector2(5, 50), String.Empty, Color.Black);
             _hudManager.AddElement(_pitchText);
 
-            _rollText = new HUDText(new Vector2(5, 65), String.Empty, Color.White);
+            _rollText = new HUDText(new Vector2(5, 65), String.Empty, Color.Black);
             _hudManager.AddElement(_rollText);
 
-            _engineEnabledText = new HUDText(new Vector2(5, 95), String.Empty, Color.White);
+            _engineEnabledText = new HUDText(new Vector2(5, 95), String.Empty, Color.Black);
             _hudManager.AddElement(_engineEnabledText);
 
             int i = 0;
@@ -49,7 +49,7 @@ namespace DroneSimulation
             foreach (Rotor rotor in _drone.Rotors.Values)
             {
                 ++i;
-                HUDText t = new HUDText(new Vector2(5, 95 + i * 15), String.Empty, Color.White);
+                HUDText t = new HUDText(new Vector2(5, 95 + i * 15), String.Empty, Color.Black);
                 _enginesTexts.Add(rotor, t);
                 _hudManager.AddElement(t);
             }

@@ -60,7 +60,7 @@ namespace ControllersLibrary
 
         public void Update(float timeStep)
         {
-            if (_drone.IsInitialized)
+            if (_drone.IsInitialized && _droneCommand.motorStart)
             {
                 AltitudeControl(timeStep);
                 YawControl(timeStep);

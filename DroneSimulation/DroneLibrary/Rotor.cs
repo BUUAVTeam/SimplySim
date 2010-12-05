@@ -14,6 +14,8 @@ namespace DroneLibrary
     {
         private const float ConvertRadianRPM = 60f / (MathHelper.Pi * 2f);
 
+        private const float _KOmega = 10.0f; //K omega- speed controller response model.
+
         private IActor _actor;
         private IMotorizedHingeJoint _joint;
         private float _torque, _baseForceApplied;
@@ -22,6 +24,7 @@ namespace DroneLibrary
         private maths.Vector3 _axis;
         private IDynamicActor _dynamicActor;
         private int _targetRPM;
+        private float _targetRPS, _currentRPS;
 
         public Rotor(World world, RotorDesc rotor, string cobName)
         {
@@ -43,7 +46,7 @@ namespace DroneLibrary
                 _baseForceApplied = -_baseForceApplied;
             }
 
-            //Defines the rotor lift
+            //Defines the rotor lift BASE FORCE == K thrust
             _baseForceApplied *= (rotor.MassLift * ((WorldDesc)world.Descriptor).Gravity.Length()) / (rotor.RPMLift * rotor.RPMLift);
 
             //Subscribes to the world for getting back the rotor's actor and joint
@@ -68,6 +71,7 @@ namespace DroneLibrary
                     throw new InvalidOperationException("Rotor " + _displayName + " is not initialized !");
                 }
                 _targetRPM = Math.Abs(value);
+                _targetRPS = _targetRPM / ConvertRadianRPM;
                 //Transform the given RPM into Radians per second
                 _joint.TargetVelocity = _torque * _targetRPM / ConvertRadianRPM;
             }
@@ -147,7 +151,13 @@ namespace DroneLibrary
             if (IsInitialized)
             {
                 //Apply a force on the actor depending of its actual velocity, its lift and the joint axis
-                float rpmVelocity = _dynamicActor.LocalAngularVelocity.Y * ConvertRadianRPM;
+
+                _currentRPS += (_KOmega * (_targetRPS - _currentRPS ))*timeStep;
+
+                //_currentRPS = _targetRPS;
+
+                float rpmVelocity = _currentRPS * ConvertRadianRPM;
+                
                 _dynamicActor.AddLocalForce(_baseForceApplied * rpmVelocity * rpmVelocity * _axis);
             }
         }

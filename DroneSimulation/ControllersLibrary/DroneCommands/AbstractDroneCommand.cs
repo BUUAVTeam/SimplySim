@@ -7,10 +7,12 @@ namespace ControllersLibrary
     public abstract class AbstractDroneCommand
     {
         private Dictionary<string, Rotor> _droneRotors;
+        public bool motorStart;
 
         public AbstractDroneCommand(Dictionary<string, Rotor> droneRotors)
         {
             _droneRotors = droneRotors;
+            motorStart = true;
         }
 
         protected Dictionary<string, Rotor> DroneRotors { get { return _droneRotors; } }
@@ -34,15 +36,17 @@ namespace ControllersLibrary
             {
                 r.TargetRPM = 0;
             }
+            motorStart = false;
         }
 
         public void StartEngines(float gravity)
         {
             foreach (Rotor rotor in _droneRotors.Values)
             {
-                int targetRPM = (int)Math.Ceiling(Math.Sign(gravity) * (Math.Sqrt(Math.Abs(gravity / rotor.Lift) / (float)_droneRotors.Count)));
+                int targetRPM = (int)Math.Ceiling((0.2f)*(Math.Sign(gravity) * (Math.Sqrt(Math.Abs(gravity / rotor.Lift) / (float)_droneRotors.Count))));
                 rotor.TargetRPM = targetRPM;
             }
+            motorStart = true;
         }
     }
 }

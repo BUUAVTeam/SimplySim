@@ -19,6 +19,7 @@ namespace DroneLibrary
         private RayHit result;
         private Vector3[] rayVec;
         private Vector3 origin;
+        private int _updateCounter;
         private PlayerInteraction _player;
         private Drone _drone;
         private int iter;
@@ -28,6 +29,7 @@ namespace DroneLibrary
             //Register to actor insertion
             _name = "LIDAR" + Guid.NewGuid().ToString();
             _player = Player;
+            _updateCounter = 0;
             world.World.ActorAddedFiltered.Subscribe(new RegexFilter<IActor>("[.]ComplexObject[.]Body"), BindActor);
             world.World.AddActuator(this);
             _world = world.World;
@@ -48,27 +50,45 @@ namespace DroneLibrary
         {
             try
             {
-                if (_actor != null)
+                if (_actor != null && !_player.Writing)
                 {
-                    desc.Origin = _actor.WorldPose.Translation + origin;
-                    for (int i = iter; i < iter + 108; i++)
+                    if (_player.Lidar)
                     {
-                        //Origin offset Transform
-                        desc.Direction = _actor.WorldPose.Matrix * rayVec[i];
-                        //result = _world.RayCastClosest(desc);
-                        if (result == null)
-                            _player.saveLIDAR(30, i);
+                        desc.Origin = _actor.WorldPose.Translation + origin;
+                        for (int i = iter; i < iter + 108; i++)
+                        {
+                            //Origin offset Transform
+                            desc.Direction = _actor.WorldPose.Matrix * rayVec[i];
+                            result = _world.RayCastClosest(desc);
+                            if (result == null)
+                                _player.saveLIDAR(30, i);
+                            else
+                                _player.saveLIDAR((result.Distance > 30 ? 30 : result.Distance), i);
+                        }
+                        iter += 108;
+                        if (iter > 972)
+                        {
+                            iter = 0;
+                            _player.newLidar = true;
+                        }
+                    }
+
+                    if (_player.Pos)
+                    {
+                        if (_updateCounter == 5)
+                        {
+                            _player.setIMU(_drone.CurrentPitch, _drone.CurrentYaw, _drone.CurrentRoll);
+                            _player.setGPS(_drone.GPS);
+                            _player.newPos = true;
+                            _updateCounter = 0;
+                        }
                         else
-                            _player.saveLIDAR((result.Distance > 30 ? 30 : result.Distance), i);
+                        {
+                            _updateCounter++;
+                        }
                     }
-                    iter += 108;
-                    if (iter > 972)
-                    {
-                        _player.publishLIDAR();
-                        _player.setIMU(_drone.CurrentPitch, _drone.CurrentYaw, _drone.CurrentRoll);
-                        _player.setGPS(_drone.GPS);
-                        iter = 0;
-                    }
+
+
                 }
             }
             catch (SystemException e)
