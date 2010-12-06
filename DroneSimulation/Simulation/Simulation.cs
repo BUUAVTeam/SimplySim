@@ -71,6 +71,7 @@ namespace DroneSimulation
             SimplySim.Simulation.Engine.Construction simulationConstruction = new SimplySim.Simulation.Engine.Construction(engineConstruction);
 
             WorldDesc worldDesc = simulationConstruction.GenerateWorldDesc(env);
+            
 
             worldDesc.FPS = 600;
             worldDesc.MaxIter = 12;

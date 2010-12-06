@@ -152,13 +152,11 @@ namespace DroneLibrary
             {
                 //Apply a force on the actor depending of its actual velocity, its lift and the joint axis
 
-                _currentRPS += (_KOmega * (_targetRPS - _currentRPS ))*timeStep;
-
-                //_currentRPS = _targetRPS;
-
-                float rpmVelocity = _currentRPS * ConvertRadianRPM;
-                
+                float rpmVelocity = _dynamicActor.LocalAngularVelocity.Y * ConvertRadianRPM;
                 _dynamicActor.AddLocalForce(_baseForceApplied * rpmVelocity * rpmVelocity * _axis);
+
+                //Console.WriteLine("Motor torque: " + _joint.MaxTorque.ToString() + " Blade inertia: " + _dynamicActor.LocalInertia.ToString());
+                
             }
         }
 

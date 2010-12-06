@@ -13,7 +13,7 @@ namespace DroneSimulation
     {
         private Drone _drone;
         private HUDManager _hudManager;
-        private HUDText _positionText, _altitudeText, _yawText, _rollText, _pitchText, _engineEnabledText;
+        private HUDText _positionText, _altitudeText, _yawText, _rollText, _pitchText, _engineEnabledText, _velocity;
 
         private List<HUDText> _statusTexts;
         private Dictionary<Rotor, HUDText> _enginesTexts;
@@ -40,6 +40,9 @@ namespace DroneSimulation
 
             _rollText = new HUDText(new Vector2(5, 65), String.Empty, Color.Black);
             _hudManager.AddElement(_rollText);
+
+            _velocity = new HUDText(new Vector2(5, 80), String.Empty, Color.Black);
+            _hudManager.AddElement(_velocity);
 
             _engineEnabledText = new HUDText(new Vector2(5, 95), String.Empty, Color.Black);
             _hudManager.AddElement(_engineEnabledText);
@@ -69,6 +72,8 @@ namespace DroneSimulation
                 _pitchText.IsVisible = true;
                 _rollText.Text = String.Format("Roll Angle  : {0:0.000}", _drone.CurrentRoll);
                 _rollText.IsVisible = true;
+                _velocity.Text = String.Format("Velocity X Y Z : {0:0.000}, {1:0.000}, {2:0.000}", _drone.velocity.X, _drone.velocity.Y, _drone.velocity.Z);
+                _velocity.IsVisible = true;
 
                 foreach (KeyValuePair<Rotor, HUDText> rotorText in _enginesTexts)
                 {
