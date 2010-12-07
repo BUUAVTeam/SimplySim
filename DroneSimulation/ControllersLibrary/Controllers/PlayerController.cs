@@ -10,7 +10,7 @@ using maths = SimplySim.Math;
 
 namespace ControllersLibrary
 {
-    public class PlayerController : SimplePIDController
+    public class PlayerController : GRASPController
     {
         private Drone _drone;
         private PlayerInteraction _player;
@@ -62,8 +62,8 @@ namespace ControllersLibrary
 
         private void updateAltitude(float time)
         {
-            base.TargetAltitude = Math.Min(Math.Max(base.TargetAltitude+(float)_deltaZ * time,0),5);
-            base.TargetYaw = base.TargetYaw + (time * (float)_deltaYaw * (float)(180.0 / Math.PI));
+            base.TargetZAccel = (float)_deltaZ;
+            base.TargetYaw = (float)_deltaYaw;
             return;
         }
 

@@ -46,8 +46,9 @@ namespace DroneLibrary
                 _baseForceApplied = -_baseForceApplied;
             }
 
+
             //Defines the rotor lift BASE FORCE == K thrust
-            _baseForceApplied *= (rotor.MassLift * ((WorldDesc)world.Descriptor).Gravity.Length()) / (rotor.RPMLift * rotor.RPMLift);
+            _baseForceApplied *= (rotor.MassLift * ((WorldDesc)world.Descriptor).Gravity.Length()) / ((rotor.RPMLift*(2f*(float)Math.PI/60f)) * (rotor.RPMLift*(2f*(float)Math.PI/60f)));
 
             //Subscribes to the world for getting back the rotor's actor and joint
             world.JointAddedFiltered.Subscribe(new RegexFilter<IJoint>(cobName + "[.]" + rotor.Engine.Name), BindJoint);
@@ -152,7 +153,7 @@ namespace DroneLibrary
             {
                 //Apply a force on the actor depending of its actual velocity, its lift and the joint axis
 
-                float rpmVelocity = _dynamicActor.LocalAngularVelocity.Y * ConvertRadianRPM;
+                float rpmVelocity = _dynamicActor.LocalAngularVelocity.Y; //* ConvertRadianRPM;
                 _dynamicActor.AddLocalForce(_baseForceApplied * rpmVelocity * rpmVelocity * _axis);
 
                 //Console.WriteLine("Motor torque: " + _joint.MaxTorque.ToString() + " Blade inertia: " + _dynamicActor.LocalInertia.ToString());

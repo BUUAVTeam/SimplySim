@@ -50,12 +50,12 @@ namespace DroneLibrary
         {
             try
             {
-                if (_actor != null && !_player.Writing)
+                if (_actor != null)
                 {
                     if (_player.Lidar)
                     {
                         desc.Origin = _actor.WorldPose.Translation + origin;
-                        for (int i = iter; i < iter + 108; i++)
+                        for (int i = iter; i < iter + 9; i++)
                         {
                             //Origin offset Transform
                             desc.Direction = _actor.WorldPose.Matrix * rayVec[i];
@@ -65,8 +65,8 @@ namespace DroneLibrary
                             else
                                 _player.saveLIDAR((result.Distance > 30 ? 30 : result.Distance), i);
                         }
-                        iter += 108;
-                        if (iter > 972)
+                        iter += 9;
+                        if (iter >= 1080)
                         {
                             iter = 0;
                             _player.newLidar = true;
@@ -75,7 +75,7 @@ namespace DroneLibrary
 
                     if (_player.Pos)
                     {
-                        if (_updateCounter == 5)
+                        if (_updateCounter == 20)
                         {
                             _player.setIMU(_drone.CurrentPitch, _drone.CurrentYaw, _drone.CurrentRoll);
                             _player.setGPS(_drone.GPS);

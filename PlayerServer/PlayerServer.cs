@@ -71,12 +71,10 @@ namespace PlayerServer
                 {
                     if (sendThread == null || !sendThread.IsAlive)
                     {
-                        DataRecieve sendData = new DataRecieve(player_stream, (newLidar ? _lidarData : null), 
+                        DataRecieve sendData = new DataRecieve(this,player_stream, (newLidar ? _lidarData : null), 
                             (newPos ? _pos : new maths.Vector3(-1000,-1000,-1000)), (newPos ? _yaw : -1000f));
                         sendThread = new Thread(new ThreadStart(sendData.sendData));
                         sendThread.Start();
-                        newLidar = false;
-                        newPos = false;
                         Writing = true;
                     }
                 }

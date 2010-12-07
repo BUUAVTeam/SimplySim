@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\GRASPController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\Coefficients.cs" />
     <Compile Include="DroneCommands\AbstractDroneCommand.cs" />

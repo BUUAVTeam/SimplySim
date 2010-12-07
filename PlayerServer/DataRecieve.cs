@@ -26,9 +26,10 @@ namespace PlayerServer
             _parentHandle = parentHandle;
             return;
         }
-        public DataRecieve(NetworkStream stream, short[] lidarData, Vector3 pos, float yaw)
+        public DataRecieve(PlayerInteraction parentHandle, NetworkStream stream, short[] lidarData, Vector3 pos, float yaw)
         {
             _encoder = new ASCIIEncoding();
+            _parentHandle = parentHandle;
             _datapath = stream;
             _lidarData = lidarData;
             _pos = pos;
@@ -115,6 +116,7 @@ namespace PlayerServer
                         x += 2;
                     }
                     _datapath.Write(send_buffer, 0, 2162);
+                    _parentHandle.newLidar = false;
                 }
                 if (_yaw != -1000f)
                 {
@@ -126,6 +128,7 @@ namespace PlayerServer
                     _datapath.Write(xpos, 0, 4);
                     byte[] ypos = BitConverter.GetBytes((int)(_pos.Z * 1000f));
                     _datapath.Write(ypos, 0, 4);
+                    _parentHandle.newPos = false;
                 }
 
             }

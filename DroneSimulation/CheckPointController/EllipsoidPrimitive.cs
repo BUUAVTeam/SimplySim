@@ -246,10 +246,10 @@ namespace CheckPointController
 
         #region IRegisterable Members
 
-        void register.IRegisterable.RenderRegister(register.Viewpoint viewpoint, ref Viewport viewport, render.RenderQueueGroup queueGroup, PoolManager poolManager)
+        void register.IRegisterable.RenderRegister(register.ViewParameters viewParameters, ref Viewport viewport, render.RenderQueueGroup queueGroup, PoolManager poolManager)
         {
             ContainmentType containment;
-            viewpoint.Frustum.Contains(ref _boundingSphere, out containment);
+            viewParameters.Frustum.Contains(ref _boundingSphere, out containment);
 
             if (containment == ContainmentType.Disjoint)
             {
@@ -258,7 +258,7 @@ namespace CheckPointController
 
             queueGroup.Register(
                 EllipsoidPrimitiveRenderable.CreateInstance(poolManager.GetPool<EllipsoidPrimitiveRenderable>(),
-                _verticesCount, _indicesWFCount, _indicesCount, _vertexBuffer, _indicesWFBuffer, _indicesBuffer, _world, viewpoint.View, viewpoint.Projection, _color, _isOpaque),
+                _verticesCount, _indicesWFCount, _indicesCount, _vertexBuffer, _indicesWFBuffer, _indicesBuffer, ref _world, ref viewParameters.Viewpoint.View, ref viewParameters.Projection, ref _color, _isOpaque),
                  render.RenderQueueNames.Custom4);
 
         }
@@ -301,7 +301,7 @@ namespace CheckPointController
 
         public static EllipsoidPrimitiveRenderable CreateInstance(Pool<EllipsoidPrimitiveRenderable> pool,
             int verticesCount, int indicesWFCount, int indicesCount, VertexBuffer vertexBuffer, IndexBuffer indicesWFBuffer,
-            IndexBuffer indicesBuffer, Matrix world, Matrix view, Matrix projection, Color color, bool isOpaque)
+            IndexBuffer indicesBuffer, ref Matrix world, ref Matrix view, ref Matrix projection, ref Color color, bool isOpaque)
         {
             EllipsoidPrimitiveRenderable result = null;
 

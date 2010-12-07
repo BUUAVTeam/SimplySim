@@ -12,8 +12,11 @@ namespace DroneSimulation
         {
             Application app = new Application (new Window(1024, 768, "Drone Simulation"));
             // Create a new simulation instance
-            Simulation simulation = new Simulation(app.MainWindow);
+
+            
+            Simulation simulation = new Simulation(app);
             // Run the simulation
+        
             app.Run(simulation);
         }
     }

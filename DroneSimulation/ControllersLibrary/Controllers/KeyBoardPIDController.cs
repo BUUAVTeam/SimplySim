@@ -5,14 +5,19 @@ using ControllersLibrary.Controllers;
 
 namespace ControllersLibrary
 {
-    public class KeyBoardPIDController : SimplePIDController
+    public class KeyBoardPIDController : GRASPController
     {
-        private const int MaxTargetPitch = 30;
-        private const int MaxTargetRoll = 30;
-        private const float StepTargetPitch = 0.5f;
-        private const float StepTargetYaw = 1.5f;
-        private const float StepTargetRoll = 1.5f;
-        private const float StepTargetAltitude = 0.1f;
+        private const float NTargetPitch = 2.92f;
+        private const float NTargetYaw = 0f;
+        private const float NTargetRoll = 2.92f;
+        private const float NTargetZRate = 1f;
+
+        private float TIMER;
+        private float dX, dY, dZ, dXs, dYs, dZs;
+        private bool TimerStart;
+
+        private Drone _drone;
+
 
         private KeyboardState _previousState;
         private bool _isStarted, _rotorsEnabled;
@@ -20,8 +25,14 @@ namespace ControllersLibrary
         public KeyBoardPIDController(Drone drone, float mass, float gravity, AbstractDroneCommand droneCommand, Parameter[] parameters)
             : base(drone, mass, gravity, droneCommand, parameters)
         {
-            _isStarted = false;
-            _rotorsEnabled = false;
+            _isStarted = true;
+            _rotorsEnabled = true;
+            TIMER = 0;
+            TimerStart = false;
+            _drone = drone;
+            dX = 0f;
+            dY = 0f;
+            dZ = 0f;
         }
 
         public void Update(KeyboardState state, bool isControlAllowed, float timeStep)
@@ -30,48 +41,59 @@ namespace ControllersLibrary
             {
                 if (isControlAllowed)
                 {
-                    if (state.IsKeyDown(Keys.Right))
+                    if (state.IsKeyDown(Keys.D))
                     {
-                        base.TargetYaw += StepTargetYaw;
+                        base.TargetRoll = -NTargetRoll;
                     }
-                    else if (state.IsKeyDown(Keys.Left))
+                    else if (state.IsKeyDown(Keys.A))
                     {
-                        base.TargetYaw -= StepTargetYaw;
+                        base.TargetRoll = NTargetRoll;
+                    }
+                    else
+                    {
+                        base.TargetRoll = 0f;
+                    }
+
+                    if (state.IsKeyDown(Keys.W))
+                    {
+                        base.TargetPitch = NTargetPitch;
+                        if (!TimerStart)
+                        {
+                            TimerStart = true;
+                            dXs = _drone.GPS.X;
+                            dYs = _drone.GPS.Y;
+                            dZs = _drone.GPS.Z;
+                        }
+                    }
+                    else if (state.IsKeyDown(Keys.S))
+                    {
+                        base.TargetPitch = -NTargetPitch;
+                    }
+                    else
+                    {
+                        base.TargetPitch = 0f;
                     }
 
                     if (state.IsKeyDown(Keys.Up))
                     {
-                        base.TargetPitch = Math.Min(MaxTargetPitch, base.TargetPitch + StepTargetPitch);
+                        base.TargetZAccel = NTargetZRate;
                     }
                     else if (state.IsKeyDown(Keys.Down))
                     {
-                        base.TargetPitch = Math.Max(-MaxTargetPitch, base.TargetPitch - StepTargetPitch);
+                        base.TargetZAccel = -NTargetZRate;
                     }
                     else
                     {
-                        base.TargetPitch = Math.Min(Math.Max(base.TargetPitch - StepTargetPitch, 0), base.TargetPitch + StepTargetPitch);
+                        base.TargetZAccel = 0f;
                     }
-
-                    if (state.IsKeyDown(Keys.V))
+                    if (TimerStart)
+                        TIMER += timeStep;
+                    if (TimerStart && _drone.CurrentPitch > 2.92f)
                     {
-                        base.TargetRoll = Math.Min(MaxTargetRoll, base.TargetRoll + StepTargetRoll);
-                    }
-                    else if (state.IsKeyDown(Keys.B))
-                    {
-                        base.TargetRoll = Math.Max(-MaxTargetRoll, base.TargetRoll - StepTargetRoll);
-                    }
-                    else
-                    {
-                        base.TargetRoll = Math.Min(Math.Max(base.TargetRoll - StepTargetRoll, 0), base.TargetRoll + StepTargetRoll);
-                    }
-
-                    if (state.IsKeyDown(Keys.Q))
-                    {
-                        base.TargetAltitude += StepTargetAltitude;
-                    }
-                    else if (state.IsKeyDown(Keys.W))
-                    {
-                        base.TargetAltitude -= StepTargetAltitude;
+                        TimerStart = false;
+                        dX = _drone.GPS.X - dXs;
+                        dY = _drone.GPS.Y - dYs;
+                        dZ = _drone.GPS.Z - dZs;
                     }
                 }
                 base.Update(timeStep);
@@ -91,7 +113,7 @@ namespace ControllersLibrary
             {
                 if (state.IsKeyUp(Keys.E) && _previousState.IsKeyDown(Keys.E))
                 {
-                    _rotorsEnabled = !_rotorsEnabled;
+                    //_rotorsEnabled = !_rotorsEnabled;
                 }
             }
 

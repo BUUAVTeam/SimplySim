@@ -5,7 +5,11 @@
         Altitude,
         Yaw,
         Pitch,
-        Roll
+        Roll,
+        Phi,
+        Theta,
+        Psi,
+        z
     }
 
     public class Coefficients

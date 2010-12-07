@@ -12,10 +12,10 @@ namespace ControllersLibrary
         public AbstractDroneCommand(Dictionary<string, Rotor> droneRotors)
         {
             _droneRotors = droneRotors;
-            motorStart = true;
+            motorStart = false;
         }
 
-        protected Dictionary<string, Rotor> DroneRotors { get { return _droneRotors; } }
+        public Dictionary<string, Rotor> DroneRotors { get { return _droneRotors; } }
 
         public abstract void AltitudeCommand(float altitudeTarget);
 

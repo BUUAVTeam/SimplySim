@@ -32,6 +32,7 @@ namespace DroneSimulation
         private const string CameraIdentifier = "Camera";
 
         private const string BoxDroneCameraName = BoxDroneName + CameraIdentifier;
+        private const string BoxDroneCameraOn = BoxDroneName + "L" + CameraIdentifier;
         private const string GlobalCameraName = "Global" + CameraIdentifier;
 
         private Drone _boxDrone;
@@ -55,11 +56,17 @@ namespace DroneSimulation
         /// <summary>
         /// Initializes a new instance of Simulation class with a default window and a viewport
         /// </summary>
-        public Simulation(EngineWindow window)
+        public Simulation(Application app)
         {
+            EngineWindow window = app.MainWindow;
+            CaptureWindow capWin = new CaptureWindow(100,100);
+            EngineWindow eng = app.CreateWindow(capWin);
+            
             Path contentRoot = Path.CreateDirectory(@"..\..\..\Content\drones").GetAbsolute();
-
+   
+          
             _viewport = window.AddViewport("Default", 1, 1, 0, 0, false);
+            
             _cameras = new Dictionary<string, PerspectiveCamera>();
 
             _player = new PlayerInteraction(3030);
@@ -99,15 +106,23 @@ namespace DroneSimulation
 
             FourHelixBoxDroneCommand _droneBoxController = new FourHelixBoxDroneCommand(_boxDrone.Rotors);
 
-            Parameter altParam = new Parameter(ParameterType.Altitude, new Coefficients(1, 0.1f, 0));
+            /*Parameter altParam = new Parameter(ParameterType.Altitude, new Coefficients(1, 0.1f, 0));
             Parameter yawParam = new Parameter(ParameterType.Yaw, new Coefficients(0.5f, 0.1f, 0));
             Parameter pitchParam = new Parameter(ParameterType.Pitch, new Coefficients(0.1f, 0.05f, 0.05f));
             Parameter rollParam = new Parameter(ParameterType.Roll, new Coefficients(0.1f, 0.05f, 0.05f));
-            Parameter[] parameters = new Parameter[] { altParam, yawParam, pitchParam, rollParam };
+            Parameter[] parameters = new Parameter[] { altParam, yawParam, pitchParam, rollParam };*/
+
+            Parameter zParam = new Parameter(ParameterType.z, new Coefficients(0.000223f, 0.1f, 0));
+            Parameter psiParam = new Parameter(ParameterType.Psi, new Coefficients(10f, 0.1f, 0.001f));
+            Parameter phiParam = new Parameter(ParameterType.Phi, new Coefficients(0.02f, 0.05f, 0.001f));
+            Parameter thetaParam = new Parameter(ParameterType.Theta, new Coefficients(0.02f, 0.05f, 0.001f));
+            Parameter[] parameters = new Parameter[] { zParam, psiParam, phiParam, thetaParam };
             
             //_fourHelixBoxDroneController = new KeyBoardPIDController(_boxDrone, 1, worldDesc.Gravity.Length(), _droneBoxController, parameters);
             _fourHelixBoxDroneController = new PlayerController(_player, _boxDrone, 1, worldDesc.Gravity.Length(), _droneBoxController, parameters);
             #endregion
+
+//            _renderPort = eng.AddViewport("VehicleCam", 1, 1, 0, 0, DroneCam);
 
             
 
@@ -150,11 +165,12 @@ namespace DroneSimulation
                 if (_cameras.TryGetValue(_actualCameraName, out cam))
                 {
                     _viewport.Camera = cam;
+         
                 }
             }
-           
-            _fourHelixBoxDroneController.Update((float)timeStep.TotalSeconds);
-            
+
+           //Update for Keyboard _fourHelixBoxDroneController.Update(state, true, ((float)timeStep.Milliseconds)/1000f);
+            _fourHelixBoxDroneController.Update((float)(timeStep.Milliseconds / 1000f));
             _boxDroneHUD.Update(_actualCameraName == BoxDroneCameraName);
 
             _previousState = state;
@@ -170,7 +186,9 @@ namespace DroneSimulation
             PerspectiveCamera droneCamera = new PerspectiveCamera(name + CameraIdentifier, 0.1f, 128.0f, xna.MathHelper.PiOver4);
             SceneNode nodeCamera = _scene.RootNode.CreateChildSceneNode();
             _cameras.Add(droneCamera.Name, droneCamera);
+            
             nodeCamera.AttachEntity(droneCamera);
+        
             nodeCamera.AttachController(new SmoothController(args.Item));
         }
 

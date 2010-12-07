@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using maths = SimplySim.Math;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using ControllersLibrary;
-using DroneLibrary;
 using ControllersLibrary.Controllers;
+using DroneLibrary;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using SimplySim.Xna.Engine;
-using SimplySim.Dynamics;
+using maths = SimplySim.Math;
 
 namespace CheckPointController
 {
