@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<Actor Mass="5" xmlns="http://www.simplysim.net/2009/12/datamodel.xsd">
+  <Elements>
+    <Element Name="Chair" Class="Object" Type="chair_files\chair">
+      <Translation />
+      <Rotation>
+        <Quaternion W="1" />
+      </Rotation>
+      <Scale />
+    </Element>
+  </Elements>
+  <LinearDamping X="0.1" Y="0.1" Z="0.1" />
+  <AngularDamping X="0.1" Y="0.1" Z="0.1" />
+  <Shapes>
+    <BoxShape>
+      <Position X="0.000206934288" Y="0.400861919" />
+      <Orientation>
+        <Quaternion W="1" />
+      </Orientation>
+      <Dimensions X="0.401308775" Y="0.10022866" Z="0.401459873" />
+    </BoxShape>
+    <BoxShape>
+      <Position X="0.184098333" Y="0.669787169" Z="-7.28152258E-08" />
+      <Orientation>
+        <Quaternion W="1" />
+      </Orientation>
+      <Dimensions X="0.0316394642" Y="0.438438535" Z="0.4024896" />
+    </BoxShape>
+    <BoxShape>
+      <Position X="0.17839852" Y="0.175333992" Z="0.177726492" />
+      <Orientation>
+        <Quaternion W="1" />
+      </Orientation>
+      <Dimensions X="0.0437455326" Y="0.350184917" Z="0.0445949621" />
+    </BoxShape>
+    <BoxShape>
+      <Position X="-0.178207248" Y="0.175333992" Z="0.177726492" />
+      <Orientation>
+        <Quaternion W="1" />
+      </Orientation>
+      <Dimensions X="0.0437455326" Y="0.350184917" Z="0.0445949621" />
+    </BoxShape>
+    <BoxShape>
+      <Position X="-0.178207248" Y="0.175333992" Z="-0.178062961" />
+      <Orientation>
+        <Quaternion W="1" />
+      </Orientation>
+      <Dimensions X="0.0437455326" Y="0.350184917" Z="0.0445949621" />
+    </BoxShape>
+    <BoxShape>
+      <Position X="0.17839852" Y="0.175333992" Z="-0.178062961" />
+      <Orientation>
+        <Quaternion W="1" />
+      </Orientation>
+      <Dimensions X="0.0437455326" Y="0.350184917" Z="0.0445949621" />
+    </BoxShape>
+  </Shapes>
+</Actor>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<Camera xmlns="http://www.simplysim.net/2009/12/datamodel.xsd">
+  <Perspective NearPlane="0.1" FarPlane="512" ViewAngle="0.7853982">
+    <Direction Z="1" />
+    <Up Y="1" />
+  </Perspective>
+</Camera>

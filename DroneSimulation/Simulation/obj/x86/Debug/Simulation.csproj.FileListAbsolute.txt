@@ -28,5 +28,7 @@ C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\D
 C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Debug\ControllersLibrary.pdb
 C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\bin\x86\Debug\Drone Library.pdb
 C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\obj\x86\Debug\DroneSimulation.form.resources
+C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\obj\x86\Debug\Simulation.csproj.GenerateResource.Cache
 C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\obj\x86\Debug\Drone Simulation.exe
 C:\Users\Ryan\Documents\GitRepo\DronePlayer\DroneSimulation\Simulation\obj\x86\Debug\Drone Simulation.pdb

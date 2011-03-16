@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<EffectSettings Technique="GaussianBlur" xmlns="http://www.simplysim.net/2009/12/datamodel.xsd">
+  <Effect>
+    <Embedded>Effects_PostProcessing_SSAO_SSAO</Embedded>
+  </Effect>
+  <Texture Name="Random" Asset="ao_files\random.dds" />
+  <Integer Name="PowFactor" Value="2" />
+  <Integer Name="AOPower" Value="1" />
+  <Single Name="Radius" Value="0.06934783" />
+  <Single Name="theta" Value="2.1804347" />
+</EffectSettings>

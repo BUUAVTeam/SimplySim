@@ -64,9 +64,16 @@
       </Rotation>
       <Scale X="0.5" Y="0.5" Z="1.85" />
     </Element>
+    <Element Name="perspective" Class="Camera" Type="..\cameras\perspective">
+      <Translation Y="0.08241266" />
+      <Rotation>
+        <Quaternion W="1" />
+      </Rotation>
+      <Scale />
+    </Element>
   </Elements>
-  <LinearDamping X="0.0" Y="0.0" Z="0.0" />
-  <AngularDamping X="0.0" Y="0.0" Z="0.0" />
+  <LinearDamping X="0.1" Y="0.1" Z="0.1" />
+  <AngularDamping X="0.1" Y="0.1" Z="0.1" />
   <Shapes>
     <BoxShape>
       <Position />

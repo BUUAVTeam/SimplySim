@@ -30,6 +30,7 @@ namespace ControllersLibrary
             TIMER = 0;
             TimerStart = false;
             _drone = drone;
+            droneCommand.motorStart = true;
             dX = 0f;
             dY = 0f;
             dZ = 0f;

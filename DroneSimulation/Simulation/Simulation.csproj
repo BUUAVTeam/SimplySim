@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4A80423F-098F-413B-AD77-0F156CADC44E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -66,6 +66,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DroneSensorsHUD.cs" />
+    <Compile Include="form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form.Designer.cs">
+      <DependentUpon>form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Simulation.cs" />
@@ -104,6 +110,11 @@
     <Content Include="Config\EngineConfig.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="form.resx">
+      <DependentUpon>form.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
